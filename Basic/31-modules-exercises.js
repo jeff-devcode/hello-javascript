@@ -4,12 +4,28 @@ Vídeo: https://youtu.be/1glVfFxj8a4?t=22720
 */
 
 // 1. Exporta una función
+export function functionExport(){
+    console.info('exportando función')
+}
 
 // 2. Exporta una constante
+export const PI = 3.1415;
 
 // 3. Exporta una clase
+export class MyClass {
+    constructor(name){
+        this.name = name;
+    }
+
+    myName(){
+        console.info('mi nombre es: ', this.name);
+    }
+}
 
 // 4. Importa una función
+// import {functionExport} from "./31-modules-exercises.js"
+
+// functionExport();
 
 // 5. Importa una constante
 
