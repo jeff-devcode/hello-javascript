@@ -5,12 +5,24 @@ Vídeo: https://youtu.be/iJvLAZ8MJ2E?t=14558
 
 // 1. Crea una función para saludar que reciba un nombre y un callback. 
 //    El callback debe ejecutarse después de 2 segundos y mostrar en consola "Hola, [nombre]".
+function saludar(nombre, callback) {
+    setTimeout(() => {
+        callback(nombre);
+    }, 2000);
+}
 
-// 2. Crea tres funciones task1(callback), task2(callback) y task3(callback). 
+function msg(name) {
+    console.log(`hola, ${name}`);
+}
+
+saludar('jeferson', msg)
+
+// 2. Crea tres funciones task1(callback), task2(callback) y task3(callback).
 //    Cada función debe tardar 1 segundo en ejecutarse y luego llamar al callback.
 
-// 3. Crea una función para verificar un número que retorne una Promesa. 
-//    Si el número es par, la promesa se resuelve con el mensaje "Número par". 
+
+// 3. Crea una función para verificar un número que retorne una Promesa.
+//    Si el número es par, la promesa se resuelve con el mensaje "Número par".
 //    Si el número es impar, la promesa se rechaza con el mensaje "Número impar".
 
 // 4. Crea tres funciones que devuelvan promesas:
@@ -41,7 +53,7 @@ Vídeo: https://youtu.be/iJvLAZ8MJ2E?t=14558
 //     - La función checkBalance() tarda 1s y devuelve un saldo de 500$.
 //     - La función withdrawMoney(amount) tarda 2s y retira dinero si hay suficiente saldo, o devuelve un error si no hay fondos.
 //     - Usa async/await para hacer que el usuario intente retirar 300$ y luego 300$ más.
-//     
+//
 //     Posible salida esperada:
 //     Saldo disponible: 500$
 //     Retirando 300$...
