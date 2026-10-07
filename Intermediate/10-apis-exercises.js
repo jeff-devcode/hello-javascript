@@ -151,9 +151,9 @@ const peticionDelete = async (id) => {
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
             method: 'DELETE',
-            // headers: {
-            //     "Content-Type": "application/json"
-            // }
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         if (!response.ok) {
             throw new Error("error HTTP", response.status);
@@ -171,23 +171,63 @@ const peticionDelete = async (id) => {
 // peticionDelete(7);
 
 // 8. Crea una función que realice una solicitud GET (la que quieras) a OpenWeatherMap
-const peticionGet = async (ciudad) => {
+const peticionGetWheaterApi = async (city, Country) => {
     try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+        const apiKey = "3d359d9cebddb3fd0d45f197b65f12bf";
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${Country}&APPID=${apiKey}`);
         if (!response.ok) {
-            throw new Error("error HTTP", response.status);
+            throw new Error("error HTTP", response);
         }
 
         const data = await response.json();
         console.log(data);
+        console.log(response);
+    } catch (error) {
+        console.log('ahora si nos cargo la chingada: ', error);
+    }
+}
+
+// peticionGetWheaterApi("Caracas", "Venezuela");
+
+// 9. Utiliza la PokéAPI para obtener los datos de un Pokémon concreto, a continuación los detalles de la especie y, finalmente, la cadena evolutiva a partir de la especie
+const pokeApi = async (pokemon) => {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+        if (!response.ok) {
+            throw new Error("error HTTP ", response);
+        }
+        const data = await response.json();
+        console.log("----------Pokémon----------");
+        console.log(data);
+
+
+        console.log(`\n\n----------Especie del pokémon ${data.name}----------`);
+        const responseEspecie = await  fetch(data.species.url);
+        if (!responseEspecie.ok) {
+            throw new Error("error HTTP con especie ", response);
+        }
+        const dataEspecie = await responseEspecie.json();
+        console.log(dataEspecie);
+
+
+        console.log(`\n\n----------Cadena Evolutiva del pokémon ${data.name}----------`);
+        const responseCadenaEvo = await fetch(dataEspecie.evolution_chain.url);
+        if (!responseCadenaEvo.ok) {
+            throw new Error("error HTTP con cadena evolutiva ", response);
+        }
+        const dataCadenaEvo = await responseCadenaEvo.json();
+        console.log(dataCadenaEvo); 
+
+
+
+
         // console.log(response);
     } catch (error) {
         console.log('ahora si nos cargo la chingada: ', error);
     }
 }
 
-peticionGet(7);
-
-// 9. Utiliza la PokéAPI para obtener los datos de un Pokémon concreto, a continuación los detalles de la especie y, finalmente, la cadena evolutiva a partir de la especie
+pokeApi("pikachu");
 
 // 10. Utiliza una herramienta como Postman o Thunder Client para probar diferentes endpoint de una API
+// LISTO 
